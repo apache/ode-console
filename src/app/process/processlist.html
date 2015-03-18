@@ -1,0 +1,79 @@
+<div class="container">
+
+  <h1>WS-BPEL Process Models</h1>
+
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+            <th></th>
+            <th>Process name</th>
+            <th>Status</th>
+            <th>Active</th>
+            <th tooltip-append-to-body="true" tooltip="Completed OK">Completed</th>
+            <th tooltip-append-to-body="true" tooltip="Completed with fault">Failed</th>
+            <th tooltip-append-to-body="true" tooltip="Suspended via a breakpoint or user intervention">Suspended</th>
+            <th>Terminated</th>
+            <th>Action</th>
+        </tr>
+      </thead>
+      <tbody ng-repeat="package in packages">
+        <tr ng-if="!packages.length">
+          <td colspan="10" ng-if="!packages.length">
+              <h4 class="text-center">No instances found.</h4>
+          </td>
+        </tr>
+        <tr class="active">
+          <td colspan="8">{{package.name}} <span class="label label-info" ng-if="package.version">Version {{package.version}}</span></td>
+          <td>
+            <button type="button" class="btn btn-danger btn-xs" ng-really-message="Are you sure?" ng-really-click="undeployPackage(package.packageId)">
+              <span class="glyphicon glyphicon-remove"></span> Undeploy
+            </button>
+          </td>
+        </tr>
+        <tr ng-repeat="process in package.processes">
+          <td></td>
+          <td data-toggle="tooltip" title="{{process.nameFull}}"><a href="#/processes/{{process.pid}}">{{process.nameShort}}</a></td>
+          <td><span class="label ng-class: 'label-process-' + (process.status | lowercase);">{{process.status}}</span></td>
+          <td>{{process.stats.active}} <span ng-if="process.stats.inrecovery > 0" class="badge" tooltip="Instances waiting for manual recovery"><i class="fa fa-exclamation-circle"></i> {{process.stats.inrecovery}}</span></td>
+          <td>{{process.stats.completed}}</td>
+          <td>{{process.stats.failed}}</td>
+          <td>{{process.stats.suspended}}</td>
+          <td>{{process.stats.terminated}}</td>
+          <td><div ng-include="'app/process/processactionbuttons.html'"></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Upload a process model</h3>
+    </div>
+    <div class="panel-body">
+      <form name="uploadForm">
+      <div ng-class="{'has-error': uploadForm.$touched && !uploadForm.packageName.$valid}" class="form-group">
+        <label for="packageName">Package Name</label>
+        <input type="text" class="form-control" id="packageName" name="packageName" ng-model="upload.packageName" placeholder="Package Name" required>
+      </div>
+      <div ng-class="{'has-error': uploadForm.touched && !uploadForm.file.$valid}"class="form-group">
+        <label for="file">Process Package</label>
+        <div class="input-group">
+          <span class="input-group-btn">
+              <span class="btn btn-default btn-file">
+                  Browse&hellip; <input type="file" name="file" id="file" ng-model="upload.file" accept="application/zip" base-sixty-four-input required>
+              </span>
+          </span>
+          <input type="text" class="form-control" ng-model="upload.file.filename" readonly>
+        </div>
+        <span class="help-block">
+            Select ODE deployment packages (.zip files containing all process artifacts at the root level)
+        </span>
+      </div>
+      <button type="submit" class="btn btn-primary" ng-click="uploadPackage()" ng-disabled="!uploadForm.$valid">Upload</button>
+      </div>
+    </form>
+  </div>
+</div>

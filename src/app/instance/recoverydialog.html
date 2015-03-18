@@ -1,0 +1,55 @@
+<div class="modal-header">
+  <h3 class="modal-title">Activity Recovery</h3>
+</div>
+<div class="modal-body">
+  <p>The following activity has entered a failure state. It can be manually recovered.</p>
+  <table class="table table-condensed">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <td>{{activity.name}}</td>
+      </tr>
+      <tr>
+        <th>Type</th>
+        <td>{{activity.type}}</td>
+      </tr>
+      <tr>
+        <th>Status</th>
+        <td>{{activity.status}}</td>
+      </tr>
+      <tr>
+        <th>Enabled</th>
+        <td>{{activity.enabled}}</td>
+      </tr>
+      <tr>
+        <th>Started</th>
+        <td>{{activity.started}}</td>
+      </tr>
+      <tr>
+        <th>Failure</th>
+        <td>{{activity.failure.failure}}</td>
+      </tr>
+      <tr>
+        <th>Retries</th>
+        <td>{{activity.failure.retries}}</td>
+      </tr>
+      <tr>
+        <th>Reason</th>
+        <td>{{activity.failure.reason}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4>Recovery Options</h4>
+  <div class="btn-group">
+    <label style="text-transform: capitalize" ng-repeat="action in activity.failure.actions" class="btn btn-default" ng-model="radio.model" btn-radio="action">{{action}}</label>
+  </div>
+  <p ng-if="radio.model == 'retry'">The execution of the activity will be tried again.</p>
+  <p ng-if="radio.model == 'cancel'">The execution of the activity will be cancelled.</p>
+  <p ng-if="radio.model == 'fault'">The execution of the activity will be faulted. The process instance will either handle this fault in a fault handler or will enter a fault state itself.</p>
+
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-disabled="!radio.model" ng-click="$close()">OK</button>
+  <button class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+</div>

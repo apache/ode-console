@@ -1,0 +1,33 @@
+# TODOs
+
+- [x] document services
+- [x] instance selections and mass changes
+- [x] parse QNames of instance faults and processFullNames
+- [x] show loading indicator/spinner
+- [x] show variable contents in instance details view
+- [x] implement activity recovery
+- [x] pretty print xml
+- [x] show endpoints on process details page
+- [x] show activity recovery counts in process list and details page
+- [x] migrate list* operations to SOAP calls.
+- [x] dont rely on remote fonts.
+- [x] implement upload deployment via SOAP
+- [x] edit variable contents in instance details view
+
+- [ ] check and fix LICENSE and NOTICE files
+- [ ] write tests!
+- [ ] add package detail view and show BPEL and WSDL sources there (PMAPI change needed)
+- [ ] handle instance/process not found cases in detail views
+- [ ] set and get process properties (also fix ODE as it returns stale values)
+- [ ] (build) add https://github.com/petebacondarwin/dgeni-example
+- [ ] detect offline
+- [ ] add events view to instance details page
+- [ ] show scope tree in instance details view
+- [ ] retrieve the replay communication and provide a dialog to replay it to a new instance.
+- [ ] parse service-refs and display it nicely. Should support all service-refs supported by ODE (WSDL 1.1, WSDL 2.0, WSA, URL)
+- [ ] render scope/activities dependency graph e.g. with https://github.com/cpettitt/dagre-d3
+- [ ] pre-parse and validate query language
+- [ ] display visual BPEL graph and map events to it (proposed GSOC project)
+
+## Deferred
+- [ ] Show WSDL URL for processes (this would be IL dependent, thus defered for now)

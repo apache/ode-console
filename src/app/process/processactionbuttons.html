@@ -1,0 +1,8 @@
+<div ng-controller="ProcessActionsController">
+  <button type="button" class="btn btn-default btn-xs" ng-if="process.status == 'ACTIVE'" ng-click="retire(process.pid)">
+    <span class="glyphicon glyphicon-pause"></span> Retire
+  </button>
+  <button type="button" class="btn btn-default btn-xs" ng-if="process.status == 'DISABLED' || process.status == 'RETIRED'" ng-click="activate(process.pid)">
+    <span class="glyphicon glyphicon-fire"></span> Activate
+  </button>
+</div>

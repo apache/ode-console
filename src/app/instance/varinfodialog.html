@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <h3 class="modal-title">Edit Variable Details</h3>
+</div>
+<div class="modal-body">
+  <h4>Variable Name</h4>
+  <p>{{var.name}}</p>
+  <h4>Content</h4>
+  <div ui-ace="{mode: 'xml'}" ng-model="var.value"></div>
+  <h4>Scope Instance ID</h4>
+  <p>{{var.siid}}</p>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="$close(var)">OK</button>
+  <button class="btn btn-default" ng-click="$dismiss()">Cancel</button>
+</div>

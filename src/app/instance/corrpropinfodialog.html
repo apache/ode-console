@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <h3 class="modal-title">Correlation Properties</h3>
+</div>
+<div class="modal-body">
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+          <th>Namespace</th>
+          <th>Local name</th>
+          <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="prop in instance.correlationProperties">
+        <td>{{prop.name.namespaceURI}}</td>
+        <td>{{prop.name.localName}}</td>
+        <td><code>{{prop.value}}</code></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="$close()">OK</button>
+</div>

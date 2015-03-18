@@ -1,0 +1,80 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-4">
+      <img ng-src="assets/images/ode-logo.png"/>
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+        <h1 class="col-md-12">Dashboard</h1>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="list-group">
+            <a ng-href="#/processes" class="list-group-item">
+              <h3 class="pull-right">
+                <i class="fa fa-folder"></i>
+              </h3>
+              <h4 class="list-group-item-heading count">{{summary.packages}}</h4>
+              <p class="list-group-item-text">Process Packages</p>
+            </a>
+            <a ng-href="#/processes" class="list-group-item">
+              <h3 class="pull-right">
+                <i class="fa fa-file"></i>
+              </h3>
+              <h4 class="list-group-item-heading count">{{summary.processes}}</h4>
+              <p class="list-group-item-text">Process Models</p>
+            </a>
+            <a ng-href="#/instances" class="list-group-item">
+              <h3 class="pull-right">
+                <i class="fa fa-cogs"></i>
+              </h3>
+              <h4 class="list-group-item-heading count">{{summary.instances}}</h4>
+              <p class="list-group-item-text">Process Instances</p>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="list-group">
+            <a ng-href="#/instances?q=status%20%3D%20active" class="list-group-item list-group-item-info">
+              <h3 class="pull-right">
+                <i class="fa fa-cog"></i>
+              </h3>
+              <h4 class="list-group-item-heading count">{{summary.active}}</h4>
+              <p class="list-group-item-text">Active Instances</p>
+            </a>
+            <a ng-href="#/instances?q=status%20%3D%20suspended" class="list-group-item list-group-item-info">
+              <h3 class="pull-right">
+                <i class="fa fa-pause"></i>
+              </h3>
+              <h4 class="list-group-item-heading count">{{summary.suspended}}</h4>
+              <p class="list-group-item-text">Suspended Instances</p>
+            </a>
+            <a ng-href="#/instances?q=status%20%3D%20completed" class="list-group-item list-group-item-success">
+              <h3 class="pull-right">
+                <i class="fa fa-check"></i>
+              </h3>
+              <h4 class="list-group-item-heading count">{{summary.completed}}</h4>
+              <p class="list-group-item-text">Completed Instances</p>
+            </a>
+            <a ng-href="#/instances?q=status%20%3D%20failed" class="list-group-item list-group-item-danger">
+              <h3 class="pull-right">
+                <i class="fa fa-warning"></i>
+              </h3>
+              <h4 class="list-group-item-heading count">{{summary.failed}}</h4>
+              <p class="list-group-item-text">Failed Instances</p>
+            </a>
+            <a ng-href="#/instances?q=status%20%3D%20terminated" class="list-group-item">
+              <h3 class="pull-right">
+                <i class="fa fa-power-off"></i>
+              </h3>
+              <h4 class="list-group-item-heading count">{{summary.terminated}}</h4>
+              <p class="list-group-item-text">Terminated Instances</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div ng-controller="InstanceActionsController">
+<button type="button" class="btn btn-default btn-xs" ng-if="instance.status == 'SUSPENDED'" ng-click="resume(instance.iid)">
+  <span class="glyphicon glyphicon-play"></span> Resume
+</button>
+<button type="button" class="btn btn-default btn-xs" ng-if="instance.status == 'ACTIVE'" ng-click="suspend(instance.iid)">
+  <span class="glyphicon glyphicon-pause"></span> Suspend
+</button>
+<button type="button" class="btn btn-xs btn-warning" ng-if="instance.status == 'ACTIVE' || instance.status == 'SUSPENDED'" ng-really-message="Are you sure?" ng-really-click="terminate(instance.iid)">
+  <span class="glyphicon glyphicon-stop"></span> Terminate
+</button>
+<button type="button" class="btn btn-xs btn-danger" ng-really-message="Are you sure?" ng-really-click="delete(instance.iid)">
+  <span class="glyphicon glyphicon-remove"></span> Delete
+</button>
+</div>

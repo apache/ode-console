@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <h3 class="modal-title">Fault Details</h3>
+</div>
+<div class="modal-body">
+  <h4>Fault Name</h4>
+  <p>{{instance.fault.name.localName}} ({{instance.fault.name.namespaceURI}})</p>
+  <h4 ng-if="instance.fault.explanation">Explanation</h4>
+  <pre ng-if="instance.fault.explanation">{{instance.fault.explanation}}</pre>
+  <h4>Line number</h4>
+  <p>{{instance.fault.lineNumber}}</p>
+  <h4>Activity Instance ID</h4>
+  <p>{{instance.fault.aiid}}</p>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="$close()">OK</button>
+</div>

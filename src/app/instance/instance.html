@@ -1,0 +1,175 @@
+<div class="container">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Instance Details</h3>
+    </div>
+    <table class="table">
+      <tr>
+        <th>Instance ID</th>
+        <td>{{instance.iid}}</td>
+      </tr>
+      <tr>
+        <th>Process ID</th>
+        <td><a href="#/processes/{{instance.pid}}">{{instance.pid}}</a></td>
+      </tr>
+      <tr>
+        <th>Process Name</th>
+        <td>{{instance.processNameFull}}</td>
+      </tr>
+      <tr>
+        <th>Started</th>
+        <td><span tooltip="{{instance.started | amCalendar }}">{{instance.started | date:'medium'}}</span></td>
+      </tr>
+      <tr>
+        <th>Last Active</th>
+        <td><span tooltip="{{instance.lastActive | amCalendar}}">{{instance.lastActive | date:'medium'}}</span></td>
+      </tr>
+      <tr>
+        <th>Status</th>
+        <td><span class="label ng-class: 'label-instance-' + (instance.status | lowercase);">{{instance.status}}</span></td>
+      </tr>
+      <tr>
+        <th>Actions</th>
+        <td><div ng-include="'app/instance/instanceactionbuttons.html'"></div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="panel panel-danger" ng-if="instance.fault">
+    <div class="panel-heading">
+      <h3 class="panel-title">Fault Details</h3>
+    </div>
+    <div class="panel-body">
+      <h4>{{instance.fault.name.localName}} <small>({{instance.fault.name.namespaceURI}})</small></h4>
+      <h4>Explanation</h4>
+      <pre>{{instance.fault.explanation}}</pre>
+      <small>Line number: {{instance.fault.lineNumber}}, Activity Instance ID: {{instance.fault.aiid}}</small>
+    </div>
+  </div>
+
+  <div class="panel panel-default" ng-if="instance.correlationProperties">
+    <div class="panel-heading">
+      <h3 class="panel-title">Correlation Properties</h3>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+            <th>QName</th>
+            <th>Value</th>
+            <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="prop in instance.correlationProperties">
+          <td><code>{{'{' + prop.name.namespaceURI + '}' + prop.name.localName}}</code></td>
+          <td><code>{{prop.value}}</code></td>
+          <td><a ng-href="#/instances?q={{'${' + prop.name.namespaceURI + '}' + prop.name.localName + ' = ' + prop.value | escape}}" role="button" class="btn btn-default btn-xs">
+              <span class="glyphicon glyphicon-search"></span> Search
+            </a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Variables</h3>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+            <th>Name</th>
+            <th>Scope</th>
+            <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="var in variables | orderBy:'siid'">
+          <td>{{var.name}}</td>
+          <td>{{var.scope.name}} ({{var.siid}})</td>
+          <td><button type="button" class="btn btn-default btn-xs" ng-click="showVariableModal(var.siid, var.name)">
+            <span class="glyphicon glyphicon-edit"></span> Edit Value
+          </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel panel-default" ng-if="endpoints.length">
+    <div class="panel-heading">
+      <h3 class="panel-title">Endpoints</h3>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+            <th>Partner Link</th>
+            <th>Partner Role</th>
+            <th>Scope</th>
+            <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="endpoint in endpoints | orderBy:'siid'">
+          <td>{{endpoint.partnerLink}}</td>
+          <td>{{endpoint.partnerRole}}</td>
+          <td>{{endpoint.scope.name}} ({{endpoint.siid}})</td>
+          <td><div ng-if="endpoint.value" ui-ace="{mode:'xml', showGutter: false}" readonly ng-model="endpoint.value" style="min-width:550px"></div><span ng-if="!endpoint.value" class="label label-default">UNCHANGED</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Activities</h3>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+            <th>AIID</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Started</th>
+            <th>Enabled</th>
+            <th>Completed</th>
+            <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="act in activities | orderBy:'aiid':reverse">
+          <td>{{act.aiid}}</td>
+          <td>{{act.name}}</td>
+          <td>{{act.type}}</td>
+          <td><span class="label ng-class: 'label-activity-' + (act.status | lowercase);">{{act.status}}</span> <span ng-if="act.failure.retries" tooltip="{{act.failure.reason}}" class="badge">{{act.failure.retries}}</span></td>
+          <td>{{act.started | date:'medium'}}</td>
+          <td>{{act.enabled | date:'medium'}}</td>
+          <td>{{act.completed | date:'medium'}}</td>
+          <td><button type="button" class="btn btn-primary btn-xs" ng-if="act.failure" ng-click="recoverActivity(act)">
+            <span class="glyphicon glyphicon-edit"></span> Recover Activity&hellip;
+          </button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <button class="btn btn-default" ng-click="showDetails = !showDetails">Toggle Raw Instance Details</button>
+  <div class="panel panel-default" collapse="!showDetails">
+    <div class="panel-heading">
+      <h3 class="panel-title">Instance Details</h3>
+    </div>
+    <div class="panel-body">
+      <h5>Activities</h5>
+      <pre>{{activities | json}}</pre>
+      <h5>Variables</h5>
+      <pre>{{variables | json}}</pre>
+      <h5>Scopes</h5>
+      <pre>{{scopes | json}}</pre>
+      <h5>Root Scope</h5>
+      <pre>{{rootScope | json}}</pre>
+    </div>
+  </div>
+</div>

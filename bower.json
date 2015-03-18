@@ -1,0 +1,48 @@
+{
+  "name": "odeConsole",
+  "version": "0.0.0",
+  "dependencies": {
+    "modernizr": "~2.8.3",
+    "jquery": "~2.1.1",
+    "angular-animate": "~1.3.11",
+    "angular-sanitize": "~1.3.11",
+    "angular-route": "~1.3.11",
+    "bootstrap-sass-official": "~3.3.1",
+    "angular-bootstrap": "0.12.x",
+    "angular": "~1.3.11",
+    "angular-smart-table": "~1.4.5",
+    "angular-xml": "~1.0.8",
+    "angular-poller": "~0.3.2",
+    "angular-moment": "~0.8.2",
+    "ngtoast": "~1.2.1",
+    "underscore": "~1.7.0",
+    "font-awesome": "~4.2.0",
+    "angular-loading-bar": "~0.6.0",
+    "angular-ui-ace": "bower",
+    "roboto-slab-fontface": "*",
+    "angular-base64-upload": "~0.0.3"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.3.6"
+  },
+  "resolutions": {
+    "jquery": "~2.1.1",
+    "angular": "~1.3.11",
+    "angular-animate": "~1.3.11",
+    "angular-sanitize": "~1.3.11"
+  },
+  "overrides": {
+    "ace-builds": {
+      "main": [
+        "src-min-noconflict/ace.js",
+        "src-min-noconflict/mode-xml.js"
+      ]
+    },
+    "roboto-slab-fontface": {
+      "main": [
+        "./roboto-slab-fontface.css",
+        "./fonts/*"
+      ]
+    }
+  }
+}

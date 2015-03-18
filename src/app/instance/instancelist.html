@@ -1,0 +1,78 @@
+<div class="container">
+
+  <div class="panel panel-default" st-table="instancesViewModel" st-safe-src="instances">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+      <form class="" role="search" ng-submit="update()">
+        <div class="input-group">
+          <input type="text" class="form-control" ng-model="filter" autofocus="">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+          </span>
+        </div>
+      </form>
+    </div>
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th><select-all-checkbox items="instancesViewModel" prop="isSelected"></ui-select-all></th>
+          <th st-sort="iid">IID</th>
+          <th st-sort="processNameShort">Process name</th>
+          <th st-sort="status">Status</th>
+          <th st-sort="started">Started</th>
+          <th st-sort="lastActive" st-sort-default="reverse">Last Active</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-if="!instances.length">
+          <td colspan="7" ng-if="!instances.length">
+              <h4 class="text-center">No instances found.</h4>
+          </td>
+        </tr>
+        <tr ng-class="instance.status | lowercase" ng-repeat="instance in instancesViewModel">
+          <td><input type="checkbox" ng-model="instance.isSelected"></td>
+          <td><a href="#/instances/{{instance.iid}}">{{instance.iid}}</a></td>
+          <td data-toggle="tooltip" title="{{instance.processNameFull}}">
+            <a href="#/processes/{{instance.pid}}">{{instance.pid}}</a>
+          </td>
+          <td ng-controller="InstanceActionsController">
+            <span class="label ng-class: 'label-instance-' + (instance.status | lowercase);">{{instance.status}}</span>
+            <i class="fa fa-exclamation-circle text-info" style="vertical-align:middle" aria-hidden="true" ng-if="instance.fault" ng-click="openFaultModal()" tooltip="Show fault details"></i>
+            <i class="fa fa-bullseye" style="vertical-align:middle" aria-hidden="true" ng-if="instance.correlationProperties" ng-click="openCorrelationPropertiesModal()" tooltip="Show correlation properties"></i>
+            <i class="fa fa-flash" style="vertical-align:middle" aria-hidden="true" ng-if="instance.failures" tooltip="{{instance.failures.count}} failure(s) @ {{instance.failures.failure | date:'medium'}}"></i>
+          </td>
+          <td>
+            <time datetime="{{instance.started}}" tooltip="{{instance.started | date:'medium'}}" am-time-ago="instance.started"></time>
+          </td>
+          <td>
+            <time datetime="{{instance.lastActive}}" tooltip="{{instance.lastActive | date:'medium'}}" am-time-ago="instance.lastActive"></time>
+          </td>
+          <td><div ng-include="'app/instance/instanceactionbuttons.html'"></div></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="7">
+            <div class="pull-left" ng-controller="InstanceActionsController">
+              <button type="button" class="btn btn-default btn-sm" ng-click="suspend(getSelectedIIDs())"><span class="glyphicon glyphicon-pause"></span> Suspend</button>
+              <button type="button" class="btn btn-default btn-sm" ng-click="resume(getSelectedIIDs())"><span class="glyphicon glyphicon-play"></span> Resume</button>
+              <button type="button" class="btn btn-warning btn-sm" ng-really-message="Are you sure?" ng-really-click="terminate(getSelectedIIDs())"><span class="glyphicon glyphicon-stop"></span> Terminate</button>
+              <button type="button" class="btn btn-danger btn-sm" ng-really-message="Are you sure?" ng-really-click="delete(getSelectedIIDs())"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+              <button type="button" class="btn btn-danger btn-sm" ng-really-message="Are you sure?" ng-really-click="deleteAll()"><span class="glyphicon glyphicon-remove"></span> Delete All</button>
+            </div>
+            <div class="btn-group pull-right">
+              <label class="btn btn-default btn-xs" ng-model="itemsByPage" btn-radio="25" uncheckable>25</label>
+              <label class="btn btn-default btn-xs" ng-model="itemsByPage" btn-radio="50" uncheckable>50</label>
+              <label class="btn btn-default btn-xs" ng-model="itemsByPage" btn-radio="100" uncheckable>100</label>
+            </div>
+          </td>
+        </tr>        
+      </tfoot>
+    </table>
+    <div class="panel-footer text-center">
+      <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+    </div>
+  </div>
+
+</div>

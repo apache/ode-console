@@ -1,0 +1,99 @@
+<div class="container">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Process Details</h3>
+    </div>
+    <table class="table">
+      <tr>
+        <th>Process Name</th>
+        <td><a href="#/instances?q=name%20%3D%20{{process.nameFull | escape}}">{{process.nameFull}}</a></td>
+      </tr>
+      <tr>
+        <th>Process ID</th>
+        <td>{{process.pid}}</td>
+      </tr>
+      <tr>
+        <th>Package</th>
+        <td>{{process.package}}</td>
+      </tr>
+      <tr>
+        <th>Deploy Date</th>
+        <td><span tooltip="{{process.deployDate | amCalendar}}">{{process.deployDate | date:'medium'}}</span></td>
+      </tr>
+      <tr>
+        <th>Status</th>
+        <td><span class="label ng-class: 'label-process-' + (process.status | lowercase);">{{process.status}}</span></td>
+      </tr>
+      <tr>
+        <th>WSDL URL</th>
+        <td></td>
+      </tr>
+      <tr>
+        <th>Actions</th>
+        <td><div ng-include="'app/process/processactionbuttons.html'"></div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="panel panel-default" ng-if="process.endpoints.length">
+    <div class="panel-heading">
+      <h3 class="panel-title">Endpoints</h3>
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="endpoint in process.endpoints">
+        <div ui-ace="{mode: 'xml'}" readonly ng-model="endpoint"></div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="panel panel-default" ng-cloak>
+    <div class="panel-heading">
+      <h3 class="panel-title"><span tooltip="Top {{maxInstances}} instances, ordered by last activity">Most Recent Process Instances</span></h3>
+    </div>
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>IID</th>
+          <th>Process name</th>
+          <th>Status</th>
+          <th>Started</th>
+          <th>Last Active</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-if="!instances.length">
+          <td colspan="6" ng-if="!instances.length">
+              <h4 class="text-center">No instances found.</h4>
+          </td>
+        </tr>
+        <tr ng-class="instance.status | lowercase" ng-repeat="instance in instances">
+          <td><a href="#/instances/{{instance.iid}}">{{instance.iid}}</a></td>
+          <td data-toggle="tooltip" title="{{instance.processNameFull}}">
+            <a href="#/processes/{{instance.pid}}">{{instance.pid}}</a>
+          </td>
+          <td ng-controller="InstanceActionsController">
+            <span class="label ng-class: 'label-instance-' + (instance.status | lowercase);">{{instance.status}}</span>
+            <i class="fa fa-exclamation-circle text-info" style="vertical-align:middle" aria-hidden="true" ng-if="instance.fault" ng-click="openFaultModal()" tooltip="Show fault details"></i>
+            <i class="fa fa-bullseye" style="vertical-align:middle" aria-hidden="true" ng-if="instance.correlationProperties" ng-click="openCorrelationPropertiesModal()" tooltip="Show correlation properties"></i>
+            <i class="fa fa-flash" style="vertical-align:middle" aria-hidden="true" ng-if="instance.failures" tooltip="{{instance.failures.count}} failure(s) ({{instance.failures.failure}})"></i>
+          </td>
+          <td>
+            <time datetime="{{instance.started}}" tooltip="{{instance.started | date:'medium'}}" am-time-ago="instance.started"></time>
+          </td>
+          <td>
+            <time datetime="{{instance.lastActive}}" tooltip="{{instance.lastActive | date:'medium'}}" am-time-ago="instance.lastActive"></time>
+          </td>
+          <td><div ng-include="'app/instance/instanceactionbuttons.html'"></div></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="6"><a href="#/instances?q={{'pid = ' + process.pid | escape}}">Show all instances</a>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

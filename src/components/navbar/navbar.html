@@ -1,0 +1,26 @@
+<nav class="navbar navbar-static-top navbar-default" ng-controller="NavbarController">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#/">
+        Apache ODE<sup>™</sup> Console
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+      <ul class="nav navbar-nav">
+        <li ng-class="{ active: isActive('/processes')}"><a ng-href="#/processes">Process Models <span class="badge">{{summary.processes}}</span></a></li>
+        <li class="dropdown" dropdown ng-class="{ active: isActive('/instances')}"><a class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">Process Instances <span class="badge">{{summary.instances}}</span><span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu" >
+              <li><a ng-href="#/instances">All Instances <span class="badge">{{summary.instances}}</span></a></li>
+              <li><a ng-href="#/instances?q=status%20%3D%20active" >Running Instances <span class="badge">{{summary.active}}</span></a></li>
+              <li><a ng-href="#/instances?q=status%20%3D%20suspended" >Suspended Instances <span class="badge">{{summary.suspended}}</span></a></li>
+              <li><a ng-href="#/instances?q=status%20%3D%20failed">Failed Instances <span class="badge">{{summary.failed}}</span></a></li>
+              <li><a ng-href="#/instances?q=status%20%3D%20completed">Completed Instances <span class="badge">{{summary.completed}}</span></a></li>
+            </ul>
+          </li>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,71 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+
+$font-family-base: 'Roboto Slab', serif;
+
+@import '../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap';
+
+// custom instance labels
+.label-instance-active {
+  @include label-variant($label-primary-bg);
+}
+
+.label-instance-suspended {
+  @include label-variant($label-primary-bg);
+}
+
+.label-instance-error {
+  @include label-variant($label-danger-bg);
+}
+
+.label-instance-completed {
+  @include label-variant($label-success-bg);
+}
+
+.label-instance-terminated {
+  @include label-variant($label-default-bg);
+}
+
+.label-instance-faulted {
+  @include label-variant($label-danger-bg);
+}
+
+.label-instance-failed {
+  @include label-variant($label-danger-bg);
+}
+
+// custom instance labels
+.label-process-active {
+  @include label-variant($label-success-bg);
+}
+
+.label-process-retired {
+  @include label-variant($label-default-bg);
+}
+
+// custom activity labels
+.label-activity-started {
+  @include label-variant($label-primary-bg);
+}
+
+.label-activity-enabled {
+  @include label-variant($label-info-bg);
+}
+
+.label-activity-completed {
+  @include label-variant($label-success-bg);
+}
+
+.label-activity-failure {
+  @include label-variant($label-danger-bg);
+}
+
+
+// status contextual table variants
+@include table-row-variant('active', white);
+@include table-row-variant('completed', $state-success-bg);
+@include table-row-variant('suspended', $state-info-bg);
+@include table-row-variant('terminated', $state-warning-bg);
+@include table-row-variant('faulted', $state-danger-bg);
+@include table-row-variant('failed', $state-danger-bg);
+@include table-row-variant('error', $state-danger-bg);
+
