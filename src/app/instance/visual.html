@@ -1,0 +1,12 @@
+<div class="container">
+	<h1>Graphical Visualisation of the process instance: {{ variables[0].iid }}</h1>
+
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Instance Details</h3>
+	  </div>
+	  <div class="panel-body">
+	    <h5>Activities</h5>
+	    <pre>{{activities | json}}</pre>
+	  </div>
+</div>
