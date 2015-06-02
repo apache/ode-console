@@ -49,6 +49,10 @@ angular.module('odeConsole', ['ngAnimate', 'ngSanitize', 'ngRoute', 'ui.bootstra
         templateUrl: 'app/instance/instance.html',
         controller: 'InstanceController'
       })
+      .when('/instances/visual/:iid', {
+        templateUrl: 'app/instance/visual.html',
+        controller: 'InstanceController'
+      })
       .when('/processes', {
         templateUrl: 'app/process/processlist.html',
         controller: 'ProcessListController'

@@ -138,7 +138,7 @@ angular.module('odeConsole')
       var scope = $(this).xpath('ns:scope', nsResolver);
       act.scope = {siid : Number(scope.attr('siid')), name: scope.attr('name'), modelId: Number(scope.attr('modelId')), status: si.status };
       si.activities.push(act);
-      
+      //console.log(si.activities);
       var failure = $(this).xpath('ns:failure', nsResolver);
       if (failure.length > 0) {
         act.failure = {};

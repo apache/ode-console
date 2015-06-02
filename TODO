@@ -15,6 +15,7 @@
 - [x] edit variable contents in instance details view
 
 - [ ] check and fix LICENSE and NOTICE files
+- [ ] rewrite st-select directive
 - [ ] write tests!
 - [ ] add package detail view and show BPEL and WSDL sources there (PMAPI change needed)
 - [ ] handle instance/process not found cases in detail views

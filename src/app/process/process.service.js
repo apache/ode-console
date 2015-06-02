@@ -96,7 +96,7 @@ angular.module('odeConsole')
         terminated: Number(processElement.xpath('ns:instance-summary/ns:instances[@state=\'TERMINATED\']/@count', nsResolver).val()),
         inrecovery: Number(processElement.xpath('ns:instance-summary/ns:failures/ns:count', nsResolver).text() || 0)
       };
-
+    //console.log(result.stats);
     return result;
   };
 
@@ -149,6 +149,7 @@ angular.module('odeConsole')
 
         for (var i = 0; i < els.length; i += 1) {
           var process = angular.element(els[i]);
+
           var packageName = process.xpath('ns:deployment-info/ns:package', nsResolver).text();
 
           packages[packageName] = packages[packageName] || _.extend(splitPackageName(packageName),

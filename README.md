@@ -1,3 +1,5 @@
+[![Travis](https://img.shields.io/travis/apache/ode-console.svg)]()
+
 # Apache ODE Console
 
 **Apache ODE** (Orchestration Director Engine) executes business processes written following the [WS-BPEL](http://ode.apache.org/ws-bpel-20.html) standard. It talks to web services, sending and receiving messages, handling data manipulation and error recovery as described by your process definition. It supports both long and short living process executions to orchestrate all the services that are part of your application.
@@ -14,6 +16,12 @@
 * Ability to trigger activity recovery.
 
 ## Build
+
+To install all needed dependencies do the following:
+1. Install nodejs and npm
+1. Install Gulp via `npm i -g gulp`
+1. Install npm dependencies via `npm install` (in the working copy)
+1. Install bower dependencies via `bower install` (in the working copy)
 
 * `gulp` or `gulp build` to build an optimized version of your application in `/dist`
 * `gulp serve` to launch a browser sync server on your source files
