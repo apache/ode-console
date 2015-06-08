@@ -2,11 +2,67 @@
 	<h1>Graphical Visualisation of the process instance: {{ variables[0].iid }}</h1>
 
 	<div class="panel panel-default">
-	  <div class="panel-heading">
-	    <h3 class="panel-title">Instance Details</h3>
-	  </div>
-	  <div class="panel-body">
-	    <h5>Activities</h5>
-	    <pre>{{activities | json}}</pre>
-	  </div>
+		<div class="panel-heading">
+			<h3 class="panel-title">Instance Details</h3>
+		</div>
+		<div ng-init="activities={{activities | json}}"></div>
+		<div class="panel-body" ng-repeat="activity in activities">
+
+			<button class="btn btn-info btn-lg" style="font-size:16px;">
+				<span class="glyphicon glyphicon-tasks"></span>
+				<a class="button" href="#">{{ activity.name }}  </a>
+				<span class="badge">
+					{{ activity.status }}
+				</span>
+			</button>
+        <!--<canvas id="mycanvas" width="5" height="50" style="border:1px solid #000000;"></canvas>
+
+        <script>
+        	var canvas = document.getElementById('mycanvas');
+        	var contxt = canvas.getContext('2d');
+        	contxt.fillStyle = 'black';
+        	contxt.fillRect(70, 10, 5, 50);
+        </script>-->
+	  <!-- <canvas id="myCanvas" width="500" height="500"
+	    style="border:1px solid #000000;"> 
+	</canvas>-->
+	    <!-- <h5>Activities</h5>
+	    <pre>{{activities | json}}</pre> -->
+	</div>
+	  <!--<script>
+	  var canvas = document.getElementById('myCanvas');
+	  var contxt = canvas.getContext('2d');
+	  var w = canvas.width;
+	  var h = canvas.height;
+	  var rectWidth = 200;
+	  var rectHeight = 40;
+	  var verticalSpaces = 50;
+	  var statusRad = 14;
+	  function activity(w, rectWidth, rectHeight){
+	  	contxt.fillStyle = '#B5B1A4';
+	  	contxt.fillRect((w/2)-(rectWidth/2), rectHeight, rectWidth, rectHeight);
+	  	return contxt;
+	  }
+	  function status(w, rectWidth,verticalSpaces, statusRad){
+	  	contxt.beginPath();
+	  	contxt.arc((w/2)+(rectWidth/2),verticalSpaces-(statusRad/2),statusRad,0,2*Math.PI);
+	  	contxt.fillStyle = 'blue';
+      	contxt.fill();
+      	contxt.strokeStyle = 'blue';
+	  	contxt.stroke();
+	  }
+
+	  function text(w, h){
+	  	contxt.font = "20px Comic Sans MS";
+	  	contxt.fillStyle = "red";
+	  	contxt.textAlign = "center";
+	  	contxt.fillText("Hello World", w/2, verticalSpaces+(rectHeight/2));
+	  }
+	  activity(w, rectWidth, rectHeight);
+	  status(w, rectWidth, verticalSpaces, statusRad);
+	  text(w, h);
+	</script>-->
+
+
+	</div>
 </div>
