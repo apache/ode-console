@@ -120,4 +120,45 @@ angular.module('odeConsole')
 
   update();
 
+  // starting handled component connection or visual connexion
+
+$scope.$watch(
+    function() {
+      var elementOne = document.getElementById('1');
+      var elementTwo = document.getElementById('3');
+      //console.log(elementOne);
+      if(elementOne&&elementTwo) {
+        jsPlumb.bind("ready", function() {
+
+          var firstInstance = jsPlumb.getInstance();
+
+          firstInstance.importDefaults({
+            Connector : [ "Straight", { curviness: 35 } ],
+            Anchors : [ "BottomCenter", "BottomCenter" ]
+          });
+
+          firstInstance.connect({
+            source:"1", 
+            target:"3", 
+            scope:"someScope" 
+          });
+        });
+      }
+  });
+
+/*        jsPlumb.bind("ready", function() {
+
+              var firstInstance = jsPlumb.getInstance();
+
+              firstInstance.importDefaults({
+                Connector : [ "Straight", { curviness: 8 } ],
+                Anchors : [ "BottomCenter", "TopCenter" ]
+              });
+
+              firstInstance.connect({
+                source:"1", 
+                target:"3", 
+                scope:"someScope" 
+              });
+            });*/
 });
