@@ -122,43 +122,32 @@ angular.module('odeConsole')
 
   // starting handled component connection or visual connexion
 
-$scope.$watch(
+  $scope.$watch(
     function() {
-      var elementOne = document.getElementById('1');
-      var elementTwo = document.getElementById('3');
-      //console.log(elementOne);
-      if(elementOne&&elementTwo) {
+      /*for (var i = 0; i < ; i++) {
+       var elements = document.getElementById(i);
+     };*/
+      var elementOne = document.getElementsByTagName('center');
+      //var elementTwo = document.getElementById('3');
+      console.log(elementOne);
+      if(elementOne != []) {
         jsPlumb.bind("ready", function() {
 
           var firstInstance = jsPlumb.getInstance();
 
           firstInstance.importDefaults({
-            Connector : [ "Straight", { curviness: 35 } ],
+            Connector : [ "Flowchart", { curviness: 65 } ],
             Anchors : [ "BottomCenter", "BottomCenter" ]
           });
-
-          firstInstance.connect({
-            source:"1", 
-            target:"3", 
+          for (var i = 0; i < elementOne.length; i++) {
+            firstInstance.connect({
+            source:elementOne[i], 
+            target:elementOne[i+1], 
             scope:"someScope" 
           });
+          }; 
         });
       }
-  });
+    });
 
-/*        jsPlumb.bind("ready", function() {
-
-              var firstInstance = jsPlumb.getInstance();
-
-              firstInstance.importDefaults({
-                Connector : [ "Straight", { curviness: 8 } ],
-                Anchors : [ "BottomCenter", "TopCenter" ]
-              });
-
-              firstInstance.connect({
-                source:"1", 
-                target:"3", 
-                scope:"someScope" 
-              });
-            });*/
 });
