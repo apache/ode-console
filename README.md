@@ -38,6 +38,12 @@ There are two ways of installing ODE console.
 1. Copy contents of `/dist` after building to the exploded webapp folder of ODE within a web container, e.g. Tomcat.
 2. Change the endpoint references IMAPI_ENDPOINT, PMAPI_ENDPOINT and DSAPI_ENDPOINT to point to your ODE installation and serve ODE console from what ever webserver you like. ODE console is a single page app that has no specific server-side requirements. When ODE and ODE console are exposed on different hosts and ports, make sure that ODE sets correct CORS headers so that the console can access ODE's endpoints.
 
+## GSoC Project Documentation
+
+
+This section provides [links](https://docs.google.com/document/d/1Us16u4Do72qY9VbVx0DePPzUcRA9pq0bh5c7vF4DlJ8/edit?usp=sharing) to the documentation about key functionalities and implementations with screenshots attached. It has been mainly adapted for developers, however, users can get neccessary information from the quick start section of this readme
+
+
 ## License
 
 Apache Software License 2.0
