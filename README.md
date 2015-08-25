@@ -41,7 +41,7 @@ There are two ways of installing ODE console.
 ## GSoC Project Documentation
 
 
-This section provides [links](https://docs.google.com/document/d/1Us16u4Do72qY9VbVx0DePPzUcRA9pq0bh5c7vF4DlJ8/edit?usp=sharing) to the documentation about key functionalities and implementations with screenshots attached. It has been mainly adapted for developers, however, users can get neccessary information from the quick start section of this readme
+This section provides a [link](https://docs.google.com/document/d/1Us16u4Do72qY9VbVx0DePPzUcRA9pq0bh5c7vF4DlJ8/edit?usp=sharing) to the documentation about key functionalities and implementations with screenshots attached. It has been mainly adapted for developers, however, users can get neccessary information from the Install/Usage section of this readme
 
 
 ## License
