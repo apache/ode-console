@@ -100,6 +100,9 @@ angular.module('odeConsole')
     return result;
   };
 
+  /** public functions **/
+  var ps = {};
+
   var updateStats = function(packages) {
     ps.summary = {};
     ps.summary.packages = 0;
@@ -135,8 +138,6 @@ angular.module('odeConsole')
     });
   };
 
-  /** public functions **/
-  var ps = {};
 
   ps.getPackages = function() {
     var deferred = $q.defer();

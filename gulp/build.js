@@ -69,7 +69,7 @@ gulp.task('injector:js', ['jshint', 'injector:css'], function () {
 
 gulp.task('partials', function () {
   return gulp.src('src/{app,components}/**/*.html')
-    .pipe($.minifyHtml({
+    .pipe($.htmlmin({
       empty: true,
       spare: true,
       quotes: true
@@ -81,10 +81,9 @@ gulp.task('partials', function () {
 });
 
 gulp.task('html', ['wiredep', 'injector:css', 'injector:js', 'partials'], function () {
-  var htmlFilter = $.filter('*.html');
-  var jsFilter = $.filter('**/*.js');
-  var cssFilter = $.filter('**/*.css');
-  var assets;
+  var htmlFilter = $.filter('*.html',{restore: true});
+  var jsFilter = $.filter('**/*.js',{restore: true});
+  var cssFilter = $.filter('**/*.css',{restore: true});
 
   return gulp.src('src/*.html')
     .pipe($.inject(gulp.src('.tmp/inject/templateCacheHtml.js', {read: false}), {
@@ -92,26 +91,25 @@ gulp.task('html', ['wiredep', 'injector:css', 'injector:js', 'partials'], functi
       ignorePath: '.tmp',
       addRootSlash: false
     }))
-    .pipe(assets = $.useref.assets())
+    .pipe($.useref())
     .pipe($.rev())
     .pipe(jsFilter)
     .pipe($.ngAnnotate())
     .pipe($.uglify({preserveComments: $.uglifySaveLicense}))
-    .pipe(jsFilter.restore())
+    .pipe(jsFilter.restore)
     .pipe(cssFilter)
     .pipe($.replace('bower_components/bootstrap-sass-official/assets/fonts/bootstrap','fonts'))
     .pipe($.csso())
-    .pipe(cssFilter.restore())
-    .pipe(assets.restore())
+    .pipe(cssFilter.restore)
     .pipe($.useref())
     .pipe($.revReplace())
     .pipe(htmlFilter)
-    .pipe($.minifyHtml({
+    .pipe($.htmlmin({
       empty: true,
       spare: true,
       quotes: true
     }))
-    .pipe(htmlFilter.restore())
+    .pipe(htmlFilter.restore)
     .pipe(gulp.dest('dist/'))
     .pipe($.size({ title: 'dist/', showFiles: true }));
 });
@@ -139,7 +137,7 @@ gulp.task('misc', function () {
 });
 
 gulp.task('clean', function (done) {
-  $.del(['dist/', '.tmp/'], done);
+  $.del.sync(['dist/', '.tmp/'], done);
 });
 
 gulp.task('build', ['html', 'images', 'fonts', 'misc']);
