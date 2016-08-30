@@ -92,7 +92,7 @@ gulp.task('html', ['wiredep', 'injector:css', 'injector:js', 'partials'], functi
       addRootSlash: false
     }))
     .pipe($.useref())
-    .pipe($.rev())
+    //.pipe($.rev())
     .pipe(jsFilter)
     .pipe($.ngAnnotate())
     .pipe($.uglify({preserveComments: $.uglifySaveLicense}))

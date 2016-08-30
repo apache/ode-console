@@ -5,6 +5,22 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 
 var wiredep = require('wiredep');
+var karma = require('karma');
+
+function runTests(configuration) {
+  var Server = karma.Server;
+
+  var server = new Server(configuration, function(exitCode) {
+        console.log('Karma has exited with ' + exitCode)
+        process.exit(exitCode)
+    });
+
+  server.on('browser_register', function (browser) {
+    console.log('A new browser was registered')
+  });
+
+ return server.start();
+}
 
 gulp.task('test', function() {
   var bowerDeps = wiredep({
@@ -15,16 +31,8 @@ gulp.task('test', function() {
   });
 
   var testFiles = bowerDeps.js.concat([
-    'src/{app,components}/**/*.js'
+    'src/app/**/*.js','src/components/**/*.js'
   ]);
 
-  return gulp.src(testFiles)
-    .pipe($.karma({
-      configFile: 'karma.conf.js',
-      action: 'run'
-    }))
-    .on('error', function(err) {
-      // Make sure failed tests cause gulp to exit non-zero
-      throw err;
-    });
+  return runTests({configFile: __dirname + '/../karma.conf.js', files: testFiles})
 });
