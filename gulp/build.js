@@ -18,7 +18,8 @@
  */
 'use strict';
 
-var gulp = require('gulp');
+var gulp = require('gulp'),
+    runSequence = require('run-sequence');
 
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
@@ -154,8 +155,11 @@ gulp.task('misc', function () {
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('clean', function (done) {
-  $.del.sync(['dist/', '.tmp/'], done);
+gulp.task('clean', function () {
+  return $.del.sync(['dist/', '.tmp/']);
 });
 
-gulp.task('build', ['html', 'images', 'fonts', 'misc']);
+gulp.task('build', function(done){
+    runSequence('clean', 'html', 'images', 'fonts', 'misc',done);
+});
+

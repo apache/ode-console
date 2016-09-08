@@ -21,22 +21,23 @@
 
 var gulp = require('gulp'),
     maven = require('maven-deploy'),
-    config = require('../maven-config.json');
+    config = require('../maven-config.json'),
+    runSequence = require('run-sequence');
 
 //install on local maven repo
-gulp.task('install', function() {
+gulp.task('install', ['build'], function() {
     maven.config(config);
     return maven.install();
 });
 
 //Snapshot release to Apache, used by CI server
-gulp.task('snapshot', function() {
+gulp.task('snapshot', ['build'], function() {
     maven.config(config);
     return maven.deploy('apache-snapshot-repo',true);
 });
 
 //Actual release to Apache repo
-gulp.task('release', function() {
+gulp.task('release', ['build'], function() {
     maven.config(config);
     return maven.deploy('apache-release-repo');
 });

@@ -8,11 +8,11 @@
     "repositories" : [
       {
         "id": "apache-snapshot-repo",
-        "url": "https://repository.apache.org/content/repositories/snapshots"
+        "url": "http://192.168.0.101:8080/repository/snapshots/"
       },
       {
         "id": "apache-release-repo",
-        "url": "https://repository.apache.org/service/local/staging/deploy/maven2"
+        "url": "http://192.168.0.101:8080/repository/internal/"
       }
     ]
 }

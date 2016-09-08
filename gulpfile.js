@@ -18,10 +18,11 @@
  */
 'use strict';
 
-var gulp = require('gulp');
+var gulp = require('gulp'),
+    runSequence = require('run-sequence');
 
 require('require-dir')('./gulp');
 
-gulp.task('default', ['clean'], function () {
-    gulp.start('build');
+gulp.task('default', function (callback) {
+     runSequence('clean', callback);
 });
