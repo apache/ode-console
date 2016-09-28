@@ -34,16 +34,20 @@ SU_USER="su $CONTAINER_USERNAME -c "
 
 NPM_COMMAND="$SU_USER 'npm install'"
 
-# A hack for frontend_maven_plugin to run gulp build task command
+# A hack for frontend_maven_plugin to use node and npm binaries 
+# installed in the docker container
 FRONTEND_RM_COMMAND="$SU_USER 'rm -rf /workspace/node'"
-FRONTEND_MK_COMMAND="$SU_USER 'mkdir /workspace/node && ln -s /opt/node/bin/node /workspace/node/node'"
+FRONTEND_MK_COMMAND="$SU_USER 'mkdir -p /workspace/node' \
+                  && $SU_USER 'ln -s /opt/node/bin/node /workspace/node/node' \
+                  && $SU_USER 'ln -s /opt/node/bin/npm /workspace/node/npm' \
+                  && $SU_USER 'ln -s /opt/node/lib/node_modules /workspace/node'"
 
 MVN_COMMAND="$SU_USER 'mvn $MVN_ARGS'"
 
 FINAL_COMMAND="$CREATE_USER_COMMAND \
-                && $NPM_COMMAND \
                 && $FRONTEND_RM_COMMAND \
                 && $FRONTEND_MK_COMMAND \
+                && $NPM_COMMAND \
                 && $MVN_COMMAND \
                 && $FRONTEND_RM_COMMAND"
 

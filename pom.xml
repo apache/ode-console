@@ -70,12 +70,8 @@ under the License.
                 <artifactId>frontend-maven-plugin</artifactId>
                 <version>${frontend-maven-plugin.version}</version>
 
-                <!--<configuration>
-                    <installDirectory>target</installDirectory>
-                    </configuration>-->
-
                 <executions>
-                    <!--<execution>
+                    <execution>
                         <id>install Node and npm</id>
                         <goals>
                             <goal>install-node-and-npm</goal>
@@ -85,6 +81,7 @@ under the License.
                             <npmVersion>${npm.version}</npmVersion>
                         </configuration>
                     </execution>
+
                     <execution>
                         <id>npm install</id>
                         <goals>
@@ -94,6 +91,7 @@ under the License.
                             <arguments>install</arguments>
                         </configuration>
                     </execution>
+
                     <execution>
                         <id>npm install bower</id>
                         <goals>
@@ -103,6 +101,7 @@ under the License.
                             <arguments>install bower</arguments>
                         </configuration>
                     </execution>
+
                     <execution>
                         <id>bower install</id>
                         <goals>
@@ -111,7 +110,8 @@ under the License.
                         <configuration>
                             <arguments>install</arguments>
                         </configuration>
-                    </execution>-->
+                    </execution>
+
                     <execution>
                         <id>gulp build</id>
                         <goals>
