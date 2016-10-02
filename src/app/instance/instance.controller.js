@@ -120,4 +120,34 @@ angular.module('odeConsole')
 
   update();
 
+  // starting handled component connection or visual connexion
+
+  $scope.$watch(
+    function() {
+      /*for (var i = 0; i < ; i++) {
+       var elements = document.getElementById(i);
+     };*/
+      var elementOne = document.getElementsByTagName('center');
+      //var elementTwo = document.getElementById('3');
+      console.log(elementOne);
+      if(elementOne != []) {
+        jsPlumb.bind("ready", function() {
+
+          var firstInstance = jsPlumb.getInstance();
+
+          firstInstance.importDefaults({
+            Connector : [ "Flowchart", { curviness: 65 } ],
+            Anchors : [ "BottomCenter", "BottomCenter" ]
+          });
+          for (var i = 0; i < elementOne.length; i++) {
+            firstInstance.connect({
+            source:elementOne[i], 
+            target:elementOne[i+1], 
+            scope:"someScope" 
+          });
+          }; 
+        });
+      }
+    });
+
 });

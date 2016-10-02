@@ -22,6 +22,7 @@
           <th st-sort="started">Started</th>
           <th st-sort="lastActive" st-sort-default="reverse">Last Active</th>
           <th>Action</th>
+          <th>Visual</th>
         </tr>
       </thead>
       <tbody>
@@ -49,6 +50,7 @@
             <time datetime="{{instance.lastActive}}" tooltip="{{instance.lastActive | date:'medium'}}" am-time-ago="instance.lastActive"></time>
           </td>
           <td><div ng-include="'app/instance/instanceactionbuttons.html'"></div></td>
+          <td><a href="#/instances/visual/{{instance.iid}}">visualize</a></td>
         </tr>
       </tbody>
       <tfoot>
