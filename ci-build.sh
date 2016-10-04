@@ -32,8 +32,6 @@ CREATE_USER_COMMAND="groupadd -f -g $GROUP_ID $CONTAINER_GROUPNAME \
 
 SU_USER="su $CONTAINER_USERNAME -c "
 
-NPM_COMMAND="$SU_USER 'npm install'"
-
 # A hack for frontend_maven_plugin to use node and npm binaries 
 # installed in the docker container
 FRONTEND_RM_COMMAND="$SU_USER 'rm -rf /workspace/node'"
@@ -47,7 +45,6 @@ MVN_COMMAND="$SU_USER 'mvn $MVN_ARGS'"
 FINAL_COMMAND="$CREATE_USER_COMMAND \
                 && $FRONTEND_RM_COMMAND \
                 && $FRONTEND_MK_COMMAND \
-                && $NPM_COMMAND \
                 && $MVN_COMMAND \
                 && $FRONTEND_RM_COMMAND"
 
