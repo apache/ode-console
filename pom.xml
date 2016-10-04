@@ -176,4 +176,38 @@ under the License.
             </plugin>
         </plugins>
     </build>
+
+    <!--
+        Apache release profile creates a source release which includes all the contents in the project directory,
+        this results in inclusion of unwanted nodejs binaries, node_modules, and build directories created during the build.
+        Hence we add exclusions for these binaries and build directories.
+    -->
+    <profiles>
+        <profile>
+            <id>apache-release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-assembly-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>source-release-assembly</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>single</goal>
+                                </goals>
+                                <configuration>
+                                    <runOnlyAtExecutionRoot>true</runOnlyAtExecutionRoot>
+                                    <descriptors>
+                                        <descriptor>assemblies/source-release.xml</descriptor>
+                                    </descriptors>
+                                    <tarLongFileMode>gnu</tarLongFileMode>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
