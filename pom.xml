@@ -175,6 +175,14 @@ under the License.
                 <version>${maven-release-plugin.version}</version>
             </plugin>
         </plugins>
+
+        <!-- Add thirparty component License under META-INF-->
+        <resources>
+            <resource>
+                <directory>legal</directory>
+                <targetPath>META-INF</targetPath>
+            </resource>
+        </resources>
     </build>
 
     <!--
