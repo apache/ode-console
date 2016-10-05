@@ -180,12 +180,14 @@
 The following third-party licenses are included:
 
 ├─ angular-bootstrap@0.12.0
-│  └─ licenses: UNKNOWN
+│  ├─ licenses: MIT*
+│  └─ homepage: https://github.com/angular-ui/bootstrap-bower
 ├─ angularpoller@0.3.2
 │  ├─ licenses: MIT*
 │  └─ homepage: https://github.com/emmaguo/angular-poller.git
 ├─ angular-ui-ace@0.2.2
-│  └─ licenses: UNKNOWN
+│  └─ licenses: MIT*
+│  └─ homepage: https://github.com/angular-ui/ui-ace
 ├─ angular-xml@1.0.8
 │  └─ licenses: MIT*
 ├─ font-awesome@4.2.0
