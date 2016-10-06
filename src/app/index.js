@@ -65,7 +65,7 @@ angular.module('odeConsole', ['ngAnimate', 'ngSanitize', 'ngRoute', 'ui.bootstra
   .constant('IMAPI_ENDPOINT', rootURI+'ode/processes/InstanceManagement')
   .constant('PMAPI_ENDPOINT', rootURI+'ode/processes/ProcessManagement')
   .constant('DSAPI_ENDPOINT', rootURI+'ode/processes/DeploymentService')
-  .constant('POLLING_INTERVAL', '4000')
+  .constant('POLLING_INTERVAL', '0')
   .filter('escape', function() {
     return window.encodeURIComponent;
   })
