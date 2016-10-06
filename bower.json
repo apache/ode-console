@@ -43,6 +43,11 @@
         "./roboto-slab-fontface.css",
         "./fonts/*"
       ]
+    },
+    "bootstrap-sass-official": {
+      "main": [
+        "./assets/fonts/bootstrap/*"
+      ]
     }
   }
 }
