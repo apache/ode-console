@@ -27,6 +27,7 @@ underscore.factory('_', function() {
   return window._;
 }); 
 
+var rootURI = window.location.toString().split('ode')[0];
 
 angular.module('odeConsole', ['ngAnimate', 'ngSanitize', 'ngRoute', 'ui.bootstrap', 'ngToast', 'smart-table', 'xml', 'angularMoment', 'underscore', 'angular-loading-bar', 'ui.ace', 'naif.base64'])
   .config(function ($httpProvider) {
@@ -61,9 +62,9 @@ angular.module('odeConsole', ['ngAnimate', 'ngSanitize', 'ngRoute', 'ui.bootstra
         redirectTo: '/'
       });
   })
-  .constant('IMAPI_ENDPOINT', 'http://localhost:8080/ode/processes/InstanceManagement')
-  .constant('PMAPI_ENDPOINT', 'http://localhost:8080/ode/processes/ProcessManagement')
-  .constant('DSAPI_ENDPOINT', 'http://localhost:8080/ode/processes/DeploymentService')
+  .constant('IMAPI_ENDPOINT', rootURI+'ode/processes/InstanceManagement')
+  .constant('PMAPI_ENDPOINT', rootURI+'ode/processes/ProcessManagement')
+  .constant('DSAPI_ENDPOINT', rootURI+'ode/processes/DeploymentService')
   .constant('POLLING_INTERVAL', '4000')
   .filter('escape', function() {
     return window.encodeURIComponent;
