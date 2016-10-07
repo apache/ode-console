@@ -27,10 +27,10 @@
         </tr>
         <tr class="active">
           <td colspan="8">{{package.name}} <span class="label label-info" ng-if="package.version">Version {{package.version}}</span></td>
-          <td>
+          <td><div ng-controller="ProcessActionsController">
             <button type="button" class="btn btn-danger btn-xs" ng-really-message="Are you sure?" ng-really-click="undeployPackage(package.packageId)">
               <span class="glyphicon glyphicon-remove"></span> Undeploy
-            </button>
+            </button></div>
           </td>
         </tr>
         <tr ng-repeat="process in package.processes">
