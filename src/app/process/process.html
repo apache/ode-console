@@ -36,15 +36,31 @@
     </table>
   </div>
 
-  <div class="panel panel-default" ng-if="process.endpoints.length">
-    <div class="panel-heading">
-      <h3 class="panel-title">Endpoints</h3>
+  <div class="panel panel-default" ng-if="process.endpoints.myRole.length || process.endpoints.partnerRole.length">
+    <div class="panel-heading"><h3 class="panel-title">Endpoints</h3></div>
+    <div class="panel-body">
+      <div class="panel" ng-if="process.endpoints.myRole.length">
+        <div class="panel-heading"><h3 class="panel-title">Process Inbound Endpoints</h3></div>
+        <div class="panel-body">
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="myRoleEndpoint in process.endpoints.myRole">
+              <div ui-ace="{mode: 'xml'}" readonly ng-model="myRoleEndpoint"></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="panel" ng-if="process.endpoints.partnerRole.length">
+        <div class="panel-heading"><h3 class="panel-title">Process Outbound Endpoints</h3></div>
+        <div class="panel-body">
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="partRoleEnpoint in process.endpoints.partnerRole">
+              <div ui-ace="{mode: 'xml'}" readonly ng-model="partRoleEnpoint"></div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <ul class="list-group">
-      <li class="list-group-item" ng-repeat="endpoint in process.endpoints">
-        <div ui-ace="{mode: 'xml'}" readonly ng-model="endpoint"></div>
-      </li>
-    </ul>
   </div>
 
   <div class="panel panel-default" ng-cloak>

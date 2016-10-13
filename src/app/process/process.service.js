@@ -69,9 +69,16 @@ angular.module('odeConsole')
     result.nameFull = SoapService.qnameToString(SoapService.createQNameObj(processNameEl.text(), processNameEl[0]));
 
     // endpoints
-    result.endpoints = [];
-    processElement.xpath('ns:endpoints/ns:endpoint-ref', nsResolver).each(function() {
-      result.endpoints.push(vkbeautify.xml($(this).first().html().trim(), 2));
+    result.endpoints = {
+      myRole:  [],
+      partnerRole: []
+    };
+
+    processElement.xpath('ns:endpoints/ns:endpoint-ref[@my-role]', nsResolver).each(function() {
+      result.endpoints.myRole.push(vkbeautify.xml($(this).first().html().trim(), 2));
+    });
+    processElement.xpath('ns:endpoints/ns:endpoint-ref[@partner-role]', nsResolver).each(function() {
+      result.endpoints.partnerRole.push(vkbeautify.xml($(this).first().html().trim(), 2));
     });
 
     // documents
