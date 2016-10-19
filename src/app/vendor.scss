@@ -1,8 +1,10 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 
 $font-family-base: 'Roboto Slab', serif;
+$fa-font-path:        "fonts" !default;
 
 @import '../../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap';
+@import '../../bower_components/font-awesome/scss/font-awesome';
 
 // custom instance labels
 .label-instance-active {

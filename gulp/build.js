@@ -117,7 +117,7 @@ gulp.task('html', ['wiredep', 'injector:css', 'injector:js', 'partials'], functi
     .pipe($.uglify({preserveComments: $.uglifySaveLicense}))
     .pipe(jsFilter.restore)
     .pipe(cssFilter)
-    .pipe($.replace('bower_components/bootstrap-sass-official/assets/fonts/bootstrap','fonts'))
+    .pipe($.replace('bower_components/bootstrap-sass-official/assets/fonts/bootstrap','styles/fonts'))
     .pipe($.csso())
     .pipe(cssFilter.restore)
     .pipe($.useref())
@@ -147,7 +147,7 @@ gulp.task('fonts', function () {
   return gulp.src($.mainBowerFiles())
     .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
     .pipe($.flatten())
-    .pipe(gulp.dest('dist/fonts/'));
+    .pipe(gulp.dest('dist/styles/fonts/'));
 });
 
 gulp.task('misc', function () {
