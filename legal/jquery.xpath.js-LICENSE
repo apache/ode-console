@@ -1,0 +1,17 @@
+jquery.xpath.js: src/vendor/jquery.xpath.js : v0.2.5
+https://github.com/ilinsky/jquery-xpath/blob/0.2.5/jquery.xpath.js
+
+/*
+ * jQuery XPath plugin v0.2.5
+ * https://github.com/ilinsky/jquery-xpath
+ * Copyright 2013, Sergey Ilinsky
+ * Dual licensed under the MIT and GPL licenses.
+ *
+ * Includes xpath.js - XPath 2.0 implementation in JavaScript
+ * https://github.com/ilinsky/xpath.js
+ * Copyright 2013, Sergey Ilinsky
+ * Dual licensed under the MIT and GPL licenses.
+ *
+ */
+
+MIT LICENSE Chosen
