@@ -1,4 +1,4 @@
-/* 
+/*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
  * distributed with this work for additional information
@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -19,15 +19,18 @@
 
 /*jslint browser: true*/
 /*global vkbeautify:false */
+/*global ApacheOdeConsole:true */
 
 'use strict';
+
+// prepopulate endpoint if not overridden
+ApacheOdeConsole.endpoint = ApacheOdeConsole.endpoint || window.location.protocol + '//' + window.location.host + window.location.pathname;
+ApacheOdeConsole.endpoint = ApacheOdeConsole.endpoint.replace(/\/$/, '');
 
 var underscore = angular.module('underscore', []);
 underscore.factory('_', function() {
   return window._;
-}); 
-
-var rootURI = window.location.toString().split('ode')[0];
+});
 
 angular.module('odeConsole', ['ngAnimate', 'ngSanitize', 'ngRoute', 'ui.bootstrap', 'ngToast', 'smart-table', 'xml', 'angularMoment', 'underscore', 'angular-loading-bar', 'ui.ace', 'naif.base64'])
   .config(function ($httpProvider) {
@@ -62,10 +65,10 @@ angular.module('odeConsole', ['ngAnimate', 'ngSanitize', 'ngRoute', 'ui.bootstra
         redirectTo: '/'
       });
   })
-  .constant('IMAPI_ENDPOINT', rootURI+'ode/processes/InstanceManagement')
-  .constant('PMAPI_ENDPOINT', rootURI+'ode/processes/ProcessManagement')
-  .constant('DSAPI_ENDPOINT', rootURI+'ode/processes/DeploymentService')
-  .constant('POLLING_INTERVAL', '0')
+  .constant('IMAPI_ENDPOINT', ApacheOdeConsole.endpoint + '/processes/InstanceManagement')
+  .constant('PMAPI_ENDPOINT', ApacheOdeConsole.endpoint + '/processes/ProcessManagement')
+  .constant('DSAPI_ENDPOINT', ApacheOdeConsole.endpoint + '/processes/DeploymentService')
+  .constant('POLLING_INTERVAL', '10000')
   .filter('escape', function() {
     return window.encodeURIComponent;
   })
