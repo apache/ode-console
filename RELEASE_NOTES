@@ -1,0 +1,9 @@
+====================================
+APACHE ODE Web Console Release Notes
+====================================
+
+Apache ODE 0.1.0 is the intial version of the new console built using AngularJS.
+It will be packaged within the Apache ODE 1.3.7 release distribution.
+
+See our Jira for more information: 
+https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12320636&version=12338402
